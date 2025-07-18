@@ -21,7 +21,7 @@ namespace Prog2FinalEmpresaAlimentoBalanceado
         Producto c2 = new Clasico(150, 225, "Perritos");
         ClienteCuenta client1 = new ClienteCuenta("Josi", 444, 15000);
         ClienteCuenta client2 = new ClienteCuenta("Ariel", 777, 30000);
-        ClienteCuenta client3 = new ClienteCuenta("Sturz", 999, 70000);
+        ClienteCuenta client3 = new ClienteCuenta("Tuki", 999, 70000);
         ClienteCuenta seleccionado;
 
         List<Producto> listaProductosSeleccionados = new List<Producto>();
@@ -283,6 +283,7 @@ namespace Prog2FinalEmpresaAlimentoBalanceado
                     while (!sr.EndOfStream)
                     {
                         string linea = sr.ReadLine();
+
                         cbProductos.Items.Add(linea);
                     }
                 }
