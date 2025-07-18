@@ -41,6 +41,8 @@
             this.bttElegrirProducto = new System.Windows.Forms.Button();
             this.bttAgregarPedido = new System.Windows.Forms.Button();
             this.txbKG = new System.Windows.Forms.TextBox();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // lbProductos
@@ -131,6 +133,7 @@
             this.bttExportarPEdidos.TabIndex = 8;
             this.bttExportarPEdidos.Text = "Exportar Pedidos";
             this.bttExportarPEdidos.UseVisualStyleBackColor = true;
+            this.bttExportarPEdidos.Click += new System.EventHandler(this.bttExportarPEdidos_Click);
             // 
             // bttImportar
             // 
@@ -141,6 +144,7 @@
             this.bttImportar.TabIndex = 9;
             this.bttImportar.Text = "Importar Productos";
             this.bttImportar.UseVisualStyleBackColor = true;
+            this.bttImportar.Click += new System.EventHandler(this.bttImportar_Click);
             // 
             // bttElegrirProducto
             // 
@@ -172,6 +176,10 @@
             this.txbKG.Size = new System.Drawing.Size(42, 20);
             this.txbKG.TabIndex = 12;
             this.txbKG.Text = "KG";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -215,6 +223,8 @@
         private System.Windows.Forms.Button bttElegrirProducto;
         private System.Windows.Forms.Button bttAgregarPedido;
         private System.Windows.Forms.TextBox txbKG;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

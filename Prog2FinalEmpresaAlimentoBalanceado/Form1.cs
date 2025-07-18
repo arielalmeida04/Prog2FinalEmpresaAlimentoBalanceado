@@ -14,19 +14,20 @@ namespace Prog2FinalEmpresaAlimentoBalanceado
 {
     public partial class Form1 : Form
     {
-        GestionVentas gv = new GestionVentas(123,"Empresario","Urquiza");
-        Premiun p1 = new Premiun("Best Dog",500,800);
+        GestionVentas gv = new GestionVentas(123, "Empresario", "Urquiza");
+        Premiun p1 = new Premiun("Best Dog", 500, 800);
         Premiun p2 = new Premiun("Best Cat", 250, 400);
         Producto c1 = new Clasico(300, 450, "Gatitos");
-        Producto c2 = new Clasico(150,225,"Perritos");
-        ClienteCuenta client1 = new ClienteCuenta("Josi",444,15000);
-        ClienteCuenta client2 = new ClienteCuenta("Ariel",777,30000);
-        ClienteCuenta client3 = new ClienteCuenta("Sturz",999,70000);
+        Producto c2 = new Clasico(150, 225, "Perritos");
+        ClienteCuenta client1 = new ClienteCuenta("Josi", 444, 15000);
+        ClienteCuenta client2 = new ClienteCuenta("Ariel", 777, 30000);
+        ClienteCuenta client3 = new ClienteCuenta("Sturz", 999, 70000);
         ClienteCuenta seleccionado;
 
         List<Producto> listaProductosSeleccionados = new List<Producto>();
-        int nroOrden=0;
-      
+        List<Pedido> listaPedidos;
+        int nroOrden = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -39,7 +40,7 @@ namespace Prog2FinalEmpresaAlimentoBalanceado
             gv.AgreagarCliente(client2);
             gv.AgreagarCliente(client3);
 
-            
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -58,9 +59,9 @@ namespace Prog2FinalEmpresaAlimentoBalanceado
 
                 MessageBox.Show(ez.Message);
             }
-            finally 
-            { 
-                if (fs != null) fs.Close(); 
+            finally
+            {
+                if (fs != null) fs.Close();
             }
         }
 
@@ -90,8 +91,8 @@ namespace Prog2FinalEmpresaAlimentoBalanceado
                 else
                 {
                     AgregarClientemv ag = new AgregarClientemv();
-                    if (ag.ShowDialog() == DialogResult.OK) 
-                    { 
+                    if (ag.ShowDialog() == DialogResult.OK)
+                    {
                         string nombre = ag.txbNombre.Text;
                         long cuit2 = Convert.ToInt64(ag.txbCuit.Text);
                         double tope = Convert.ToDouble(ag.txbTope.Text);
@@ -113,7 +114,7 @@ namespace Prog2FinalEmpresaAlimentoBalanceado
 
                     }
                 }
-            
+
             }
             catch (Exception ez)
             {
@@ -127,7 +128,7 @@ namespace Prog2FinalEmpresaAlimentoBalanceado
             try
             {
                 long cuit = Convert.ToInt64(txbCUIT.Text);
-                MessageBox.Show("El saldo es: " + gv.VerSaldo(cuit)); 
+                MessageBox.Show("El saldo es: " + gv.VerSaldo(cuit));
             }
             catch (Exception ez)
             {
@@ -143,11 +144,11 @@ namespace Prog2FinalEmpresaAlimentoBalanceado
                 long cuit = Convert.ToInt64(txbCUIT.Text);
                 double monto = Convert.ToDouble(txbMonto.Text);
                 bool result;
-                result = gv.AgregarPago(cuit,monto);
-                if (result==true) 
+                result = gv.AgregarPago(cuit, monto);
+                if (result == true)
                 {
                     MessageBox.Show("Se realizo el pago con exito");
-                
+
                 }
                 else
                 {
@@ -178,7 +179,7 @@ namespace Prog2FinalEmpresaAlimentoBalanceado
                 MessageBox.Show(ez.Message);
             }
 
-            finally 
+            finally
             {
                 if (fs != null) fs.Close();
             }
@@ -186,14 +187,14 @@ namespace Prog2FinalEmpresaAlimentoBalanceado
 
         private void bttElegrirProducto_Click(object sender, EventArgs e)
         {
-            
+
             try
             {
                 double kg = Convert.ToDouble(txbKG.Text);
 
-              Producto producto = cbProductos.SelectedItem as Producto;
-              producto.CantidadKilos = kg;
-              lbProductos.Items.Add(producto);
+                Producto producto = cbProductos.SelectedItem as Producto;
+                producto.CantidadKilos = kg;
+                lbProductos.Items.Add(producto);
             }
             catch (Exception ez)
             {
@@ -212,17 +213,17 @@ namespace Prog2FinalEmpresaAlimentoBalanceado
                 }
                 nroOrden++;
                 Pedido p = gv.GenerarPedido(nroOrden, listaProductosSeleccionados);
-                bool pedido= gv.SumarPedido(seleccionado,p);
-                if (pedido==true)
+                bool pedido = gv.SumarPedido(seleccionado, p);
+                if (pedido == true)
                 {
-                    
+
                     MessageBox.Show(p.ToString());
                 }
                 else
                 {
                     MessageBox.Show("No se logro el pedido");
                 }
-            
+
             }
             catch (Exception)
             {
@@ -233,14 +234,111 @@ namespace Prog2FinalEmpresaAlimentoBalanceado
 
         private void bttExportarClientes_Click(object sender, EventArgs e)
         {
+            FileStream fs = null;
+            StreamWriter sw = null;
             try
             {
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    fs = new FileStream(saveFileDialog1.FileName, FileMode.CreateNew, FileAccess.Write);
+                    sw = new StreamWriter(fs);
+                    List<ClienteCuenta> lista = gv.ObtenerClientes();
+                    foreach (ClienteCuenta item in lista)
+                    {
+                        sw.WriteLine(item.ToString());
+                    }
+                }
 
             }
             catch (Exception ez)
             {
 
                 MessageBox.Show(ez.Message);
+            }
+
+            finally
+            {
+                if (fs != null)
+                {
+                    if (sw != null)
+                    {
+                        sw.Close();
+                        fs.Close();
+                    }
+                }
+
+            }
+        }
+
+        private void bttImportar_Click(object sender, EventArgs e)
+        {
+            FileStream fs = null;
+            StreamReader sr = null;
+            try
+            {
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    fs = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read);
+                    sr = new StreamReader(fs);
+                    while (!sr.EndOfStream)
+                    {
+                        string linea = sr.ReadLine();
+                        cbProductos.Items.Add(linea);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            finally
+            {
+                if (fs != null)
+                {
+                    if (sr != null)
+                    {
+                        sr.Close();
+                        fs.Close();
+                    }
+                }
+            }
+        }
+
+        private void bttExportarPEdidos_Click(object sender, EventArgs e)
+        {
+            FileStream fs = null;
+            StreamWriter sr = null;
+            try
+            {
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    fs = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write);
+                    sr = new StreamWriter(fs);
+                    listaPedidos = gv.ObtenerPedidos();
+                    foreach (var item in listaPedidos)
+                    {
+                        sr.WriteLine(item);
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                if (fs != null)
+                {
+                    if (sr != null)
+                    {
+                        sr.Close();
+                        fs.Close();
+                    }
+                }
             }
         }
     }
