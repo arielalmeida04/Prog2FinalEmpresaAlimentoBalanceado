@@ -113,6 +113,7 @@
             // 
             // bttExportarClientes
             // 
+            this.bttExportarClientes.Enabled = false;
             this.bttExportarClientes.Location = new System.Drawing.Point(627, 53);
             this.bttExportarClientes.Name = "bttExportarClientes";
             this.bttExportarClientes.Size = new System.Drawing.Size(125, 74);
@@ -123,6 +124,7 @@
             // 
             // bttExportarPEdidos
             // 
+            this.bttExportarPEdidos.Enabled = false;
             this.bttExportarPEdidos.Location = new System.Drawing.Point(627, 133);
             this.bttExportarPEdidos.Name = "bttExportarPEdidos";
             this.bttExportarPEdidos.Size = new System.Drawing.Size(125, 74);
@@ -132,6 +134,7 @@
             // 
             // bttImportar
             // 
+            this.bttImportar.Enabled = false;
             this.bttImportar.Location = new System.Drawing.Point(627, 220);
             this.bttImportar.Name = "bttImportar";
             this.bttImportar.Size = new System.Drawing.Size(125, 74);
@@ -141,6 +144,7 @@
             // 
             // bttElegrirProducto
             // 
+            this.bttElegrirProducto.Enabled = false;
             this.bttElegrirProducto.Location = new System.Drawing.Point(66, 280);
             this.bttElegrirProducto.Name = "bttElegrirProducto";
             this.bttElegrirProducto.Size = new System.Drawing.Size(152, 23);
@@ -151,6 +155,7 @@
             // 
             // bttAgregarPedido
             // 
+            this.bttAgregarPedido.Enabled = false;
             this.bttAgregarPedido.Location = new System.Drawing.Point(240, 374);
             this.bttAgregarPedido.Name = "bttAgregarPedido";
             this.bttAgregarPedido.Size = new System.Drawing.Size(173, 23);
@@ -161,6 +166,7 @@
             // 
             // txbKG
             // 
+            this.txbKG.Enabled = false;
             this.txbKG.Location = new System.Drawing.Point(176, 254);
             this.txbKG.Name = "txbKG";
             this.txbKG.Size = new System.Drawing.Size(42, 20);

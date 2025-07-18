@@ -79,6 +79,13 @@ namespace Prog2FinalEmpresaAlimentoBalanceado
                     cbProductos.Enabled = true;
                     bttRealizarPago.Enabled = true;
                     bttVerSaldo.Enabled = true;
+                    bttExportarClientes.Enabled = true;
+                    bttExportarPEdidos.Enabled = true;
+                    bttImportar.Enabled = true;
+                    txbKG.Enabled = true;
+                    bttAgregarPedido.Enabled = true;
+                    bttAgregarSeleccionar.Enabled = true;
+                    bttElegrirProducto.Enabled = true;
                 }
                 else
                 {
@@ -96,6 +103,11 @@ namespace Prog2FinalEmpresaAlimentoBalanceado
                         bttRealizarPago.Enabled = true;
                         bttVerSaldo.Enabled = true;
                         txbMonto.Enabled = true;
+                        bttImportar.Enabled = true;
+                        txbKG.Enabled = true;
+                        bttAgregarPedido.Enabled = true;
+                        bttAgregarSeleccionar.Enabled = true;
+                        bttElegrirProducto.Enabled = true;
 
                         cbProductos.Items.Add(nuevisimo);
 
